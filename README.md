@@ -1,10 +1,12 @@
 # Snake_Cplupplus
-Bài tập nhóm: Lập trình game "Con Rắn" bằng ngôn ngữ C++ trên nền tảng Windows
+Bài tập nhóm: Lập trình game "Con Rắn" bằng ngôn ngữ C++ trên nền tảng Windows.
 
 PHÂN CHIA CÔNG VIỆC
 
-Bằng: Làm báo cáo nhóm bằng Latex
+Các thành viên trong nhóm sẽ cùng nhau tìm kiếm thông tin về trò chơi.
 
-Thạch: Viết soucre code trò chơi con rắn
+Bằng: Làm báo cáo nhóm bằng Latex và chỉnh giao diện.
 
-Nhân: Chỉnh giao diện trò chơi
+Thạch: Viết soucre code trò chơi con rắn và chỉnh giao diện.
+
+Nhân: Viết soucre code trò chơi con rắn và chỉnh giao diện.
