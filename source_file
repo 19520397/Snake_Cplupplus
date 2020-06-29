@@ -59,7 +59,8 @@ public:
 	void draw() {
 		for (int i = 0; i < snakelength; i++) {
 			gotoxy(snake[i].x, snake[i].y);
-			cout << "0";
+			if (i == 0) cout << "@";
+			else cout << "0";
 		}
 	}
 };
@@ -109,7 +110,11 @@ public:
 };
 
 bool end_game(SNAKE s) {
-	return (s.snake[0].x > 30 || s.snake[0].x < 1 || s.snake[0].y > 20 || s.snake[0].y < 1);
+	if (s.snake[0].x > 30 || s.snake[0].x < 1 || s.snake[0].y > 20 || s.snake[0].y < 1) return true;
+	for (int i = 1; i < s.snakelength; i++) {
+		if (s.snake[0].x == s.snake[i].x && s.snake[0].y == s.snake[i].y) return true;
+	}
+	return false;
 }
 void eat_food(SNAKE& s, FOOD& food) {
 	if (s.snake[0].x == food.toado.x && s.snake[0].y == food.toado.y) {
@@ -136,6 +141,7 @@ int main() {
 			last = direct;
 			direct = _getch();
 			if (direct != 'a' && direct != 'w' && direct != 'd' && direct != 's') direct = last;
+			if (direct == 'a' && last == 'd' || direct == 'd' && last == 'a' || direct == 's' && last == 'w' || direct == 'w' && last == 's') direct = last;
 		}
 		system("cls");
 		board.draw();
@@ -143,9 +149,9 @@ int main() {
 		snake.draw();
 		eat_food(snake,food);
 		food.draw();
-		Sleep(300);
+		Sleep(200);
 	}
-	system("cls");
+	gotoxy(12, 25);
 	cout << "END GAME";
 	return 0;
 }
