@@ -1,6 +1,0 @@
-﻿  snake_2.cpp
-C:\Users\admin\Documents\GitHub\Snake_Cplupplus\snake_2\snake_2\snake_2.cpp(119,15): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
-C:\Users\admin\Documents\GitHub\Snake_Cplupplus\snake_2\snake_2\snake_2.cpp(153,33): warning C4305: 'initializing': truncation from 'double' to 'float'
-C:\Users\admin\Documents\GitHub\Snake_Cplupplus\snake_2\snake_2\snake_2.cpp(250,59): warning C4244: 'argument': conversion from 'float' to 'unsigned int', possible loss of data
-C:\Users\admin\Documents\GitHub\Snake_Cplupplus\snake_2\snake_2\snake_2.cpp(250,47): warning C4244: 'argument': conversion from 'float' to 'unsigned int', possible loss of data
-  snake_2.vcxproj -> C:\Users\admin\Documents\GitHub\Snake_Cplupplus\snake_2\x64\Debug\snake_2.exe
