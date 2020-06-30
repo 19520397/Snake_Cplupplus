@@ -14,7 +14,7 @@ enum DIRECTION
     DIRECTION_RIGHT = 1, DIRECTION_UP = 2, DIRECTION_LEFT = 3, DIRECTION_DOWN = 4
 };
 
-int score = 0;
+int score = 1;
 
 // Height vs width of window in grid
 int N = 50, M = 50;
@@ -165,8 +165,11 @@ int start(RenderWindow& window)
 			Event e;
 			while (window.pollEvent(e))
 			{
-				if (e.type == Event::Closed)
-					window.close();
+                if (e.type == Event::Closed)
+                {
+                    window.close();
+                    return -1;
+                }
 			}
 
 #pragma region Get Input
@@ -230,8 +233,9 @@ int start(RenderWindow& window)
 #pragma endregion
 
 		}
-		if (window.isOpen()) {//play again y/n?;
-		}
+        if (window.isOpen()) {//play again y/n?;
+        }
+        else return -1;
 	}
     isPlaying = false;
     return 2;
