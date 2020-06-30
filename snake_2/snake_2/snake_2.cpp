@@ -14,36 +14,35 @@ enum DIRECTION
     DIRECTION_RIGHT = 1, DIRECTION_UP = 2, DIRECTION_LEFT = 3, DIRECTION_DOWN = 4
 };
 
-int score = 1;
+int score = 0;
 
 // Height vs width of window in grid
 int N = 50, M = 50;
 
 // Size of image in pixels
-int img_size = 16;
+float img_size = 16;
 
 // Width of board in pixels
-int width_board = img_size * N;
+float width_board = img_size * N;
 // Height of board in pixels
-int height_board = img_size * M;
+float height_board = img_size * M;
 
 // Width of UI space in pixels
-int width_UI = img_size * 10;
+float width_UI = img_size * 10;
 // Height of UI space in pixels
-int height_UI = height_board;
+float height_UI = height_board;
 
 
 DIRECTION direction = DIRECTION_RIGHT;
-int length = 4;
+int length = 2;
 
 struct Snake
 {
-    int x, y;
+    int x=15, y=15;
 }  
 
 // Snake data
 s[100];
-
 
 struct Fruit
 {
@@ -64,7 +63,8 @@ void update()
     // Update snake's body position
     for (int i = length; i > 0; --i)
     {
-        s[i].x = s[i - 1].x; s[i].y = s[i - 1].y;
+        s[i].x = s[i - 1].x; 
+		s[i].y = s[i - 1].y;
     }
 
     // Update snake's head position
@@ -81,24 +81,24 @@ void update()
     }
 
     // Check whether snake's head has collision with border
-    if (s[0].x > N) // Hit right border
+    if (s[0].x >= N) // Hit right border
     {
         s[0].x = 0;
         gameOver();
     }
-    if (s[0].x < 0) // Hit left border
+    if (s[0].x <= 0) // Hit left border
     {
         s[0].x = N; 
         gameOver();
     }
-    if (s[0].y > M) // Hit top border
+    if (s[0].y >= M-1) // Hit bottom border
     {
-        s[0].y = 0; 
+        s[0].y = 0;  
         gameOver();
     }
-    if (s[0].y < 0) // Hit bottom border 
+    if (s[0].y <= 0) // Hit top border
     {
-        s[0].y = M;
+        s[0].y = M-1;
         gameOver();
     }
 
@@ -119,12 +119,14 @@ int start(RenderWindow& window)
 
     isPlaying = true;
 
-    Texture t1, t2;
+    Texture t1, t2, t3;
     t1.loadFromFile("images/white.png");
     t2.loadFromFile("images/red.png");
+	t3.loadFromFile("images/purble.jpg");
 
     Sprite sprite1(t1 );
     Sprite sprite2(t2);
+	Sprite sprite3(t3);
 
     Font font_arcade;
     if (!font_arcade.loadFromFile("Fonts/ARCADECLASSIC.TTF"))
@@ -133,93 +135,113 @@ int start(RenderWindow& window)
     }
     Text txt_score;
     txt_score.setFont(font_arcade);
-    txt_score.setFillColor(Color::Red);
+    txt_score.setFillColor(Color::White);
     txt_score.setCharacterSize(32);
-    txt_score.setString("Score");
+    txt_score.setString("Point");
     txt_score.setPosition(width_board + width_UI/2 - txt_score.getLocalBounds().width / 2, height_UI / 2 - 32);
     
     Text txt;
     txt.setFont(font_arcade);
-    txt.setFillColor(Color::Red);
+    txt.setFillColor(Color::Magenta);
     txt.setCharacterSize(32);
-    txt.setPosition(txt_score.getPosition().x +  txt_score.getLocalBounds().width / 2, txt_score.getPosition().y + txt_score.getGlobalBounds().height + 4);
+    txt.setPosition(txt_score.getPosition().x +  txt_score.getLocalBounds().width / 2- 16, txt_score.getPosition().y + txt_score.getGlobalBounds().height + 16);
+
+	
 
     Clock clock;
-    float timer = 0, delay = 0.1;
+    float timer = 0, delay = 0.3;
 
     f.x = 10;
     f.y = 10;
+	int playAgain = 1;
+	while (playAgain == 1)
+	{
+		while (window.isOpen() && isPlaying)
+		{
+			float time = clock.getElapsedTime().asSeconds();
+			clock.restart();
+			timer += time;
 
-    while (window.isOpen() && isPlaying)
-    {
-        float time = clock.getElapsedTime().asSeconds();
-        clock.restart();
-        timer += time;
-
-        Event e;
-        while (window.pollEvent(e))
-        {
-            if (e.type == Event::Closed)
-                window.close();
-        }
+			Event e;
+			while (window.pollEvent(e))
+			{
+				if (e.type == Event::Closed)
+					window.close();
+			}
 
 #pragma region Get Input
-        if (Keyboard::isKeyPressed(Keyboard::Left) && direction != DIRECTION_RIGHT) direction = DIRECTION_LEFT;
-        if (Keyboard::isKeyPressed(Keyboard::Right) && direction != DIRECTION_LEFT) direction = DIRECTION_RIGHT;
-        if (Keyboard::isKeyPressed(Keyboard::Up) && direction != DIRECTION_DOWN) direction = DIRECTION_UP;
-        if (Keyboard::isKeyPressed(Keyboard::Down) && direction != DIRECTION_UP) direction = DIRECTION_DOWN;
+			if (Keyboard::isKeyPressed(Keyboard::Left) && direction != DIRECTION_RIGHT) direction = DIRECTION_LEFT;
+			if (Keyboard::isKeyPressed(Keyboard::Right) && direction != DIRECTION_LEFT) direction = DIRECTION_RIGHT;
+			if (Keyboard::isKeyPressed(Keyboard::Up) && direction != DIRECTION_DOWN) direction = DIRECTION_UP;
+			if (Keyboard::isKeyPressed(Keyboard::Down) && direction != DIRECTION_UP) direction = DIRECTION_DOWN;
 #pragma endregion
 
-        if (timer > delay)
-        {
-            // Delay time has reached, reset timer
-            timer = 0;
-            // Update position of object 
-            update();
-            // Check low fps
-            if (timer > delay + delay) cout << "Low fps\n";
-        }
-        else
-        {
-            // Wait delay time
-        }
+			if (timer > delay)
+			{
+				// Delay time has reached, reset timer
+				timer = 0;
+				// Update position of object 
+				update();
+				// Check low fps
+				if (timer > delay + delay) cout << "Low fps\n";
+			}
+			else
+			{
+				// Wait delay time
+			}
 
 #pragma region Draw
 
-        window.clear();
+			window.clear();
 
-        // Draw background
-        for (int i = 0; i < N; i++)
-            for (int j = 0; j < M; j++)
-            {
-                sprite1.setPosition(i * img_size, j * img_size);  window.draw(sprite1);
-            }
-        // Draw snake
-        for (int i = 0; i < length; i++)
-        {
-            sprite2.setPosition(s[i].x * img_size, s[i].y * img_size);  window.draw(sprite2);
-        }
-        // Draw food
-        sprite2.setPosition(f.x * img_size, f.y * img_size);  window.draw(sprite2);
-        // Draw UI
-        
-        txt.setString(std::to_string(score)); window.draw(txt); window.draw(txt_score);
+			// Draw background
+			for (int i = 0; i <= N; i++)
+				for (int j = 0; j <= M; j++)
+				{
+					sprite1.setPosition(i * img_size, j * img_size);  window.draw(sprite1);
+				}
+			// Draw Border
+			for (int i = 0; i <= N; i++)
+				if (i == 0 || i == N) {
+					for (int j = 0; j < M; j++)
+					{
+						sprite3.setPosition(i * img_size, j * img_size);  window.draw(sprite3);
+					}
+				}
+			for (int i = 0; i < N; i++)
+				for (int j = 0; j <= M; j++)
+				{
+					if (j == 0 || j == M - 1) {
+						sprite3.setPosition(i * img_size, j * img_size);  window.draw(sprite3);
+					}
+				}
+			// Draw snake
+			for (int i = 0; i < length; i++)
+			{
+				sprite2.setPosition(s[i].x * img_size, s[i].y * img_size);  window.draw(sprite2);
+			}
+			// Draw food
+			sprite2.setPosition(f.x * img_size, f.y * img_size);  window.draw(sprite2);
+			// Draw UI
 
-        window.display();
+			txt.setString(std::to_string(score)); window.draw(txt); window.draw(txt_score);// window.draw(posX);
+
+			window.display();
 #pragma endregion
 
-    }
-
-    if (window.isOpen()) window.close();
+		}
+		if (window.isOpen()) {//play again y/n?;
+		}
+	}
     isPlaying = false;
-
     return 2;
 }
 
 void gameOver()
 {
     cout << "Game Over\n";
-    //isPlaying = false;
+    isPlaying = false;
+	//system("pause");
 }
 
 int show_credit(RenderWindow& window)

@@ -1,11 +1,6 @@
 ﻿  snake_2.cpp
-D:\Study\KNNN\snake\Snake_Cplupplus\snake_2\snake_2\snake_2.cpp(121,15): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
-D:\Study\KNNN\snake\Snake_Cplupplus\snake_2\snake_2\snake_2.cpp(142,106): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-D:\Study\KNNN\snake\Snake_Cplupplus\snake_2\snake_2\snake_2.cpp(151,33): warning C4305: 'initializing': truncation from 'double' to 'float'
-D:\Study\KNNN\snake\Snake_Cplupplus\snake_2\snake_2\snake_2.cpp(198,53): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-D:\Study\KNNN\snake\Snake_Cplupplus\snake_2\snake_2\snake_2.cpp(198,39): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-D:\Study\KNNN\snake\Snake_Cplupplus\snake_2\snake_2\snake_2.cpp(203,59): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-D:\Study\KNNN\snake\Snake_Cplupplus\snake_2\snake_2\snake_2.cpp(203,40): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-D:\Study\KNNN\snake\Snake_Cplupplus\snake_2\snake_2\snake_2.cpp(206,49): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-D:\Study\KNNN\snake\Snake_Cplupplus\snake_2\snake_2\snake_2.cpp(206,33): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-  snake_2.vcxproj -> D:\Study\KNNN\snake\Snake_Cplupplus\snake_2\x64\Debug\snake_2.exe
+C:\Users\admin\Documents\GitHub\Snake_Cplupplus\snake_2\snake_2\snake_2.cpp(119,15): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+C:\Users\admin\Documents\GitHub\Snake_Cplupplus\snake_2\snake_2\snake_2.cpp(153,33): warning C4305: 'initializing': truncation from 'double' to 'float'
+C:\Users\admin\Documents\GitHub\Snake_Cplupplus\snake_2\snake_2\snake_2.cpp(250,59): warning C4244: 'argument': conversion from 'float' to 'unsigned int', possible loss of data
+C:\Users\admin\Documents\GitHub\Snake_Cplupplus\snake_2\snake_2\snake_2.cpp(250,47): warning C4244: 'argument': conversion from 'float' to 'unsigned int', possible loss of data
+  snake_2.vcxproj -> C:\Users\admin\Documents\GitHub\Snake_Cplupplus\snake_2\x64\Debug\snake_2.exe
