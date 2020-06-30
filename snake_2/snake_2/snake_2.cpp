@@ -54,11 +54,10 @@ struct Fruit
 f;
 
 void loadScreen();
-void start(RenderWindow&);
+int start(RenderWindow&);
 void update();
 void gameOver();
-
-void draw();
+int show_credit(RenderWindow&);
 
 void update()
 {
@@ -114,7 +113,7 @@ void update()
     }
 }
 
-void start(RenderWindow& window)
+int start(RenderWindow& window)
 {
     srand(time(0));
 
@@ -124,7 +123,7 @@ void start(RenderWindow& window)
     t1.loadFromFile("images/white.png");
     t2.loadFromFile("images/red.png");
 
-    Sprite sprite1(t1);
+    Sprite sprite1(t1 );
     Sprite sprite2(t2);
 
     Font font_arcade;
@@ -213,6 +212,8 @@ void start(RenderWindow& window)
 
     if (window.isOpen()) window.close();
     isPlaying = false;
+
+    return 2;
 }
 
 void gameOver()
@@ -221,11 +222,144 @@ void gameOver()
     //isPlaying = false;
 }
 
+int show_credit(RenderWindow& window)
+{
+    window.clear();
+
+    Font font;
+    if (!font.loadFromFile("Fonts/manaspc.ttf"))
+    {
+        cout << "ERROR: Could not load font";
+    }
+    Text txt;
+    txt.setFont(font);
+    txt.setFillColor(Color::Green);
+    txt.setCharacterSize(32);
+
+    txt.setPosition(50, 50);
+    txt.setString(">Esc<");
+    window.draw(txt);
+    
+    txt.setString("Author\n\tNguyen Pham Duy Bang - Dragnell\n\tNguyen Trong Nhan - C0R3M3N\n\tVu Ngoc Thach - DragonPow");
+    txt.setPosition(200, txt.getPosition().y + txt.getGlobalBounds().height + 50);
+    window.draw(txt);
+
+
+    window.display();
+    while (window.isOpen() && !(Keyboard::isKeyPressed(Keyboard::Escape)))
+    {
+        // Wait until user want to return
+        Event e;
+        while (window.pollEvent(e))
+        {
+            if (e.type == Event::Closed)
+                window.close();
+        }
+    }
+
+    if (window.isOpen()) return 2;
+    else return -1;
+}
+
 void loadScreen()
 {
     RenderWindow window(VideoMode(width_board + width_UI, height_board), "Snake Game!");
+    float width = width_board + width_UI;
+    int op = 2;
+    while (op > 0)
+    {
+        {
+            Font font;
+            if (!font.loadFromFile("Fonts/ARCADECLASSIC.TTF"))
+            {
+                cout << "ERROR: Could not load font";
+            }
+            Text txt;
+            txt.setFont(font);
 
-    start(window);
+            Font font2;
+            if (!font2.loadFromFile("Fonts/manaspc.ttf"))
+            {
+                cout << "ERROR: Could not load font";
+            }
+            Text txt2;
+            txt2.setFont(font2);
+            txt2.setFillColor(Color::White);
+            txt2.setString(">");
+            txt2.setCharacterSize(50);
+
+            while (window.isOpen())
+            {
+                if (Keyboard::isKeyPressed(Keyboard::Enter))
+                {
+                    break;
+                }
+                else if (Keyboard::isKeyPressed(Keyboard::Up))
+                {
+                    if (op < 2) op++;
+                    while (Keyboard::isKeyPressed(Keyboard::Up)) {}
+                }
+                else if (Keyboard::isKeyPressed(Keyboard::Down))
+                {
+                    if (op > 0) op--;
+                    while (Keyboard::isKeyPressed(Keyboard::Down)) {}
+                }
+
+                Event e;
+                while (window.pollEvent(e))
+                {
+                    if (e.type == Event::Closed)
+                        window.close();
+                }
+
+                window.clear();
+
+                txt.setFillColor(Color::Green);
+                txt.setCharacterSize(72);
+                txt.setString("Snake Game");
+                txt.setPosition(width / 2 - txt.getGlobalBounds().width / 2, height_board / 3 - txt.getGlobalBounds().height / 2);
+                window.draw(txt);
+
+                float temp = txt.getPosition().y + txt.getGlobalBounds().height + 30;
+                txt.setCharacterSize(50);
+                txt.setFillColor(Color::Yellow);
+                txt.setString("Start");
+                txt.setPosition(width / 2 - txt.getGlobalBounds().width / 2, temp);
+                window.draw(txt);
+
+                if (op == 2)
+                {
+                    txt2.setPosition(txt.getPosition().x - txt2.getGlobalBounds().width - 10, txt.getPosition().y);
+                    window.draw(txt2);
+                }
+
+                txt.setString("Credit");
+                txt.setPosition(txt.getPosition().x, txt.getPosition().y + txt.getGlobalBounds().height + 15);
+                window.draw(txt);
+
+                if (op == 1)
+                {
+                    txt2.setPosition(txt.getPosition().x - txt2.getGlobalBounds().width - 10, txt.getPosition().y);
+                    window.draw(txt2);
+                }
+
+                txt.setString("Quit");
+                txt.setPosition(txt.getPosition().x, txt.getPosition().y + txt.getGlobalBounds().height + 15);
+                window.draw(txt);
+
+                if (op == 0)
+                {
+                    txt2.setPosition(txt.getPosition().x - txt2.getGlobalBounds().width - 10, txt.getPosition().y);
+                    window.draw(txt2);
+                }
+
+                window.display();
+            }
+        }
+
+        if (op == 2) op = start(window);
+        else if (op == 1) op = show_credit(window);
+    }
 }
 
 int main()
