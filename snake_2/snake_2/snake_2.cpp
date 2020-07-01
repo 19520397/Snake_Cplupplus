@@ -97,22 +97,26 @@ void update()
     // Check whether snake's head has collision with border
     if (s[0].x >= N) // Hit right border
     {
-        s[0].x = 0;
+        //s[0].x = 0;
+        cout << "Hit right border\n";
         gameOver();
     }
     if (s[0].x <= 0) // Hit left border
     {
-        s[0].x = N; 
+        //s[0].x = N; 
+        cout << "Hit left border\n";
         gameOver();
     }
     if (s[0].y >= M-1) // Hit bottom border
     {
-        s[0].y = 0;  
+        //s[0].y = 0;  
+        cout << "Hit bottom border\n";
         gameOver();
     }
     if (s[0].y <= 0) // Hit top border
     {
-        s[0].y = M-1;
+        //s[0].y = M-1;
+        cout << "Hit top border\n";
         gameOver();
     }
 
@@ -121,7 +125,8 @@ void update()
     {
         if (s[0].x == s[i].x && s[0].y == s[i].y)
         {
-            length = i;
+            //length = i;
+            cout << "Hit its-self\n";
             gameOver();
         }
     }
@@ -129,8 +134,115 @@ void update()
 
 int checkPlayAgain(RenderWindow& window)
 {
-    cout << "Play Again\n";
-    return 1;
+    int op = 1;
+    Texture t;
+    t.create(window.getSize().x, window.getSize().y);
+    t.update(window);
+    Sprite last_state(t);
+    Font font;
+    if (!font.loadFromFile("Fonts/ARCADECLASSIC.TTF"))
+    {
+        cout << "ERROR: Could not load font";
+    }
+    Text txt;
+    txt.setFont(font);
+
+    Font font2;
+    if (!font2.loadFromFile("Fonts/manaspc.ttf"))
+    {
+        cout << "ERROR: Could not load font";
+    }
+    Text txt2;
+    txt2.setFont(font2);
+    txt2.setFillColor(Color::Black);
+    txt2.setString(">");
+    txt2.setCharacterSize(50);
+
+    bool isChanged = true;
+    while (window.isOpen())
+    {
+        if (Keyboard::isKeyPressed(Keyboard::Enter))
+        {
+            while (Keyboard::isKeyPressed(Keyboard::Enter))
+            {
+                // wait to key up
+            }
+            break;
+        }
+        else if (Keyboard::isKeyPressed(Keyboard::Up))
+        {
+            if (op < 1) op++;
+            isChanged = true;
+            //while (Keyboard::isKeyPressed(Keyboard::Up)) {}
+        }
+        else if (Keyboard::isKeyPressed(Keyboard::Down))
+        {
+            if (op > 0) op--;
+            isChanged = true;
+            //while (Keyboard::isKeyPressed(Keyboard::Down)) {}
+        }
+
+        Event e;
+        while (window.pollEvent(e))
+        {
+            if (e.type == Event::Closed)
+                window.close();
+        }
+
+        if (isChanged)
+        {
+            window.clear();
+            window.draw(last_state);
+
+            txt.setFillColor(Color::Red);
+            txt.setCharacterSize(150);
+            txt.setString("You Died");
+            txt.setPosition((width_board + width_UI) / 2 - txt.getGlobalBounds().width / 2, height_board / 3 - txt.getGlobalBounds().height / 2);
+            window.draw(txt);
+
+            float temp = txt.getPosition().y + txt.getGlobalBounds().height + 50;
+            txt.setCharacterSize(txt2.getCharacterSize());
+            txt.setFillColor(Color::Blue);
+            txt.setString("Play again");
+            txt.setPosition(txt.getPosition().x + 80, temp);
+            window.draw(txt);
+
+            if (op == 1)
+            {
+                txt2.setPosition(txt.getPosition().x - txt2.getGlobalBounds().width - 10, txt.getPosition().y);
+                window.draw(txt2);
+            }
+
+            txt.setString("Back");
+            txt.setPosition(txt.getPosition().x, txt.getPosition().y + txt.getGlobalBounds().height + 15);
+            window.draw(txt);
+
+            if (op == 0)
+            {
+                txt2.setPosition(txt.getPosition().x - txt2.getGlobalBounds().width - 10, txt.getPosition().y);
+                window.draw(txt2);
+            }
+
+            window.display();
+            while (Keyboard::isKeyPressed(Keyboard::Up) || Keyboard::isKeyPressed(Keyboard::Down))
+            {
+                // wait for key up
+            }
+            isChanged = false;
+        }
+
+    }
+
+    if (op == 1)
+    {
+        cout << "Play Again\n";
+        return 1;
+    }
+    else
+    {
+        cout << "Back\n";
+        return -1;
+    }
 }
 
 int start(RenderWindow& window)
@@ -173,11 +285,15 @@ int start(RenderWindow& window)
         Clock clock;
         float timer = 0, delay = 0.1;
 
+        score = 0;
+        length = 1;
         s[0].x = 15;
         s[0].y = 15;
         f.x = 10;
         f.y = 10;
-        direction = DIRECTION::DIRECTION_RIGHT;
+
+        DIRECTION temp_d = DIRECTION::DIRECTION_RIGHT;
+        direction = temp_d;
 
         while (window.isOpen() && isPlaying)
         {
@@ -196,14 +312,22 @@ int start(RenderWindow& window)
             }
 
 #pragma region Get Input
-            if (Keyboard::isKeyPressed(Keyboard::Left) && direction != DIRECTION_RIGHT) direction = DIRECTION_LEFT;
-            if (Keyboard::isKeyPressed(Keyboard::Right) && direction != DIRECTION_LEFT) direction = DIRECTION_RIGHT;
-            if (Keyboard::isKeyPressed(Keyboard::Up) && direction != DIRECTION_DOWN) direction = DIRECTION_UP;
-            if (Keyboard::isKeyPressed(Keyboard::Down) && direction != DIRECTION_UP) direction = DIRECTION_DOWN;
+            if (Keyboard::isKeyPressed(Keyboard::Left)) temp_d = DIRECTION_LEFT;
+            if (Keyboard::isKeyPressed(Keyboard::Right)) temp_d = DIRECTION_RIGHT;
+            if (Keyboard::isKeyPressed(Keyboard::Up)) temp_d = DIRECTION_UP;
+            if (Keyboard::isKeyPressed(Keyboard::Down)) temp_d = DIRECTION_DOWN;
 #pragma endregion
 
             if (timer > delay)
             {
+                if (!((temp_d == DIRECTION_LEFT && direction == DIRECTION_RIGHT)
+                    || (temp_d == DIRECTION_RIGHT && direction == DIRECTION_LEFT)
+                    || (temp_d == DIRECTION_UP && direction == DIRECTION_DOWN)
+                    || (temp_d == DIRECTION_DOWN && direction == DIRECTION_UP)))
+                {
+                    direction = temp_d;
+                }
+
                 // Delay time has reached, reset timer
                 timer = 0;
                 // Update position of object 
