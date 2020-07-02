@@ -35,7 +35,7 @@ float height_UI = height_board;
 
 
 DIRECTION direction;
-int length = 3;
+int length;
 
 struct Snake
 {
@@ -300,12 +300,12 @@ int start(RenderWindow& window)
         
         score = 0;
         length = 3;
-        s[0].x = 15;
-        s[0].y = 15;
-        s[1].y = 14;
-        s[1].y = 15;
-        s[2].y = 14;
-        s[2].y = 15;
+        for (int i = 0; i < length; i++)
+        {
+            s[i].x = 15;
+            s[i].y = 15;
+        }
+        timer = delay * 1.1;
         f.x = 10;
         f.y = 10;
 
