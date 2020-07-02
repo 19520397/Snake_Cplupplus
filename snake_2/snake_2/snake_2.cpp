@@ -1,4 +1,5 @@
 #include <SFML/Graphics.hpp>
+#include <SFML/Audio.hpp>
 #include <time.h>
 #include <iostream>
 #include <string>
@@ -46,14 +47,15 @@ struct Fruit
     int x, y;
 };
 
+Sound loadSound(std::string);
 void loadScreen();
 int start(RenderWindow&);
-void update(Snake*&, Fruit&);
+void update(Snake*&, Fruit&, Sound&);
 void gameOver();
 int show_credit(RenderWindow&);
 int checkPlayAgain(RenderWindow&);
 
-void update(Snake*& s, Fruit& f)
+void update(Snake*& s, Fruit& f, Sound& sound)
 {
     // Update snake's body position
     for (int i = length; i > 0; --i)
@@ -83,7 +85,7 @@ void update(Snake*& s, Fruit& f)
                 i = 0;
             }
         }
-
+        sound.play();
         score++;
         length++;
     }
@@ -243,6 +245,11 @@ int start(RenderWindow& window)
 {
     int op = 1;
     int MAX = (N - 2) * (M - 2);
+    Sound sound_eatfood;
+    SoundBuffer buffer;
+    buffer.loadFromFile("audio/eatfood.ogg");
+    sound_eatfood.setBuffer(buffer);
+    sound_eatfood.setVolume(50.f);
     Snake* s = new Snake[MAX];
     Fruit f;
     Texture t1, t2, t3, t4;
@@ -327,7 +334,7 @@ int start(RenderWindow& window)
                 // Delay time has reached, reset timer
                 timer = 0;
                 // Update position of object 
-                update(s, f);
+                update(s, f, sound_eatfood);
 
 #pragma region Draw
 
@@ -441,6 +448,8 @@ void loadScreen()
     while (op > 0)
     {
         {
+            Sound sound;
+            SoundBuffer buffer;
             Font font;
             if (!font.loadFromFile("Fonts/ARCADECLASSIC.TTF"))
             {
@@ -490,6 +499,11 @@ void loadScreen()
                 if (isChanged)
                 {
                     window.clear();
+                   
+                    if (!buffer.loadFromFile("audio/beforegame.ogg")) cout << "Not found";
+                    sound.setBuffer(buffer);
+                    sound.setVolume(30.f);
+                    sound.play();
 
                     txt.setFillColor(Color::Green);
                     txt.setCharacterSize(72);
