@@ -452,6 +452,24 @@ int start(RenderWindow& window)
 	txt2.setCharacterSize(23);
 	txt2.setString("+10");
 
+	Text txt3;
+	txt3.setFont(font_manaspc);
+	txt3.setFillColor(Color::Cyan);
+	txt3.setCharacterSize(23);
+	txt3.setString("Nice!");
+
+	Text txt4;
+	txt4.setFont(font_manaspc);
+	txt4.setFillColor(Color::Yellow);
+	txt4.setCharacterSize(23);
+	txt4.setString("Perfect;>");
+
+	Text txt5;
+	txt5.setFont(font_manaspc);
+	txt5.setFillColor(Color::Blue);
+	txt5.setCharacterSize(23);
+	txt5.setString("Master;)");
+
     while (op == 1)
     {
         srand(time(0));
@@ -603,6 +621,44 @@ int start(RenderWindow& window)
 					txt2.setPosition(txt.getPosition().x + txt.getLocalBounds().width + 16, txt.getPosition().y);
 					window.draw(txt2);
 					k--;
+				}
+
+				int ran = rand() % 4;
+				switch (ran)
+				{
+				default:
+					break;
+				case 1:
+					if (foodeating) {
+						k = 57;
+					}
+					if (k > 0) {
+						txt3.setPosition(txt_score.getPosition().x, txt_score.getPosition().y - 50);
+						window.draw(txt3);
+						k--;
+					}
+					break;
+
+				case 2:
+					if (foodeating) {
+						k = 25;
+					}
+					if (k > 0) {
+						txt4.setPosition(txt_score.getPosition().x, txt_score.getPosition().y - 70);
+						window.draw(txt4);
+						k--;
+					}
+					break;
+				case 3:
+					if (foodeating) {
+						k = 30;
+					}
+					if (k > 0) {
+						txt5.setPosition(txt_score.getPosition().x, txt_score.getPosition().y - 90);
+						window.draw(txt5);
+						k--;
+					}
+					break;
 				}
 				
                 window.display();
