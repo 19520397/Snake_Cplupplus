@@ -242,7 +242,8 @@ int checkPlayAgain(RenderWindow& window)
 int start(RenderWindow& window)
 {
     int op = 1;
-    Snake* s = new Snake[(N - 2) * (M - 2)];
+    int MAX = (N - 2) * (M - 2);
+    Snake* s = new Snake[MAX];
     Fruit f;
     Texture t1, t2, t3, t4;
     t1.loadFromFile("images/white.png");
