@@ -89,21 +89,18 @@ void update(Snake*& s, Fruit& f)
     }
 
     // Check whether snake's head has collision with border
-    if (s[0].x >= N) // Hit right border
+    if (s[0].x >= N-1) // Hit right border
     {
-        //s[0].x = 0;
         cout << "Hit right border\n";
         gameOver();
     }
     if (s[0].x <= 0) // Hit left border
     {
-        //s[0].x = N; 
         cout << "Hit left border\n";
         gameOver();
     }
     if (s[0].y >= M-1) // Hit bottom border
     {
-        //s[0].y = 0;  
         cout << "Hit bottom border\n";
         gameOver();
     }
@@ -249,7 +246,7 @@ int start(RenderWindow& window)
     t1.loadFromFile("images/white.png");
     t2.loadFromFile("images/red.png");
     t3.loadFromFile("images/purble.jpg");
-    t4.loadFromFile("images/green.png");
+    t4.loadFromFile("images/green_2.png");
 
     Sprite sprite1(t1);
     Sprite sprite2(t2);
