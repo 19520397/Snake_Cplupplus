@@ -133,6 +133,16 @@ int checkPlayAgain(RenderWindow& window)
     t.update(window);
     Sprite last_state(t);
     Font font;
+
+    Sound sound_die,sound_choose;
+    SoundBuffer buffer_die,buffer_choose;
+    buffer_die.loadFromFile("audio/message.ogg");
+    buffer_choose.loadFromFile("audio/beforegame.ogg");
+    sound_die.setBuffer(buffer_die);
+    sound_die.setVolume(50.f);
+    sound_choose.setBuffer(buffer_choose);
+    sound_choose.setVolume(50.f);
+
     if (!font.loadFromFile("Fonts/ARCADECLASSIC.TTF"))
     {
         cout << "ERROR: Could not load font";
@@ -152,6 +162,7 @@ int checkPlayAgain(RenderWindow& window)
     txt2.setCharacterSize(50);
 
     bool isChanged = true;
+    sound_die.play();
     while (window.isOpen())
     {
         if (Keyboard::isKeyPressed(Keyboard::Enter))
@@ -186,6 +197,7 @@ int checkPlayAgain(RenderWindow& window)
         {
             window.clear();
             window.draw(last_state);
+            sound_choose.play();
 
             txt.setFillColor(Color::Red);
             txt.setCharacterSize(150);
