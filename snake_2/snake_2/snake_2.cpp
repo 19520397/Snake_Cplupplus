@@ -9,13 +9,14 @@ using std::cin;
 using std::cout;
 
 bool isPlaying = false;
+bool foodeating = false;
 
 enum DIRECTION
 {
     DIRECTION_RIGHT, DIRECTION_UP, DIRECTION_LEFT, DIRECTION_DOWN
 };
 
-int score = 0;
+int score;
 
 // Width and Height of window in grid
 int N = 50, M = 50;
@@ -29,7 +30,7 @@ float width_board = img_size * N;
 float height_board = img_size * M;
 
 // Width of UI space in pixels
-float width_UI = img_size * 10;
+float width_UI = img_size * 15;
 // Height of UI space in pixels
 float height_UI = height_board;
 
@@ -87,7 +88,9 @@ void update(Snake*& s, Fruit& f, Sound& sound)
         sound.play();
         score+=10;
         length++;
+		foodeating = true;
     }
+	else { foodeating = false; }
 
     // Check whether snake's head has collision with border
     if (s[0].x >= N-1) // Hit right border
@@ -278,17 +281,31 @@ int start(RenderWindow& window)
     {
         cout << "ERROR: Could not load font";
     }
+	Font font_manaspc;
+	if (!font_manaspc.loadFromFile("Fonts/manaspc.TTF"))
+	{
+		cout << "ERROR: Could not load font";
+	}
     Text txt_score;
     txt_score.setFont(font_arcade);
     txt_score.setFillColor(Color::White);
-    txt_score.setCharacterSize(32);
+    txt_score.setCharacterSize(50);
     txt_score.setString("Point");
-    txt_score.setPosition(width_board + width_UI / 2 - txt_score.getLocalBounds().width / 2, height_UI / 2 - 32);
+    txt_score.setPosition(width_board + width_UI / 2 - txt_score.getLocalBounds().width / 2, height_UI / 2 - 48);
     Text txt;
-    txt.setFont(font_arcade);
+    txt.setFont(font_manaspc);
     txt.setFillColor(Color::Magenta);
-    txt.setCharacterSize(32);
-    txt.setPosition(txt_score.getPosition().x + txt_score.getLocalBounds().width / 2 - 16, txt_score.getPosition().y + txt_score.getGlobalBounds().height + 16);
+    txt.setCharacterSize(23);
+    txt.setPosition(txt_score.getPosition().x + txt_score.getLocalBounds().width / 2 - 32, txt_score.getPosition().y + txt_score.getGlobalBounds().height + 35);
+	
+	Text txt2;
+	txt2.setFont(font_manaspc);
+	txt2.setFillColor(Color::Green);
+	txt2.setCharacterSize(23);
+	txt2.setString("+10");
+	
+
+	
     while (op == 1)
     {
         srand(time(0));
@@ -296,9 +313,11 @@ int start(RenderWindow& window)
         isPlaying = true;
 
         Clock clock;
+		Clock clock2;
+		
         float timer = 0, delay = 0.1;
-        
-        score = 0;
+		float timer2 = 0, delay2 = 2;
+        score = 00;
         length = 3;
         for (int i = 0; i < length; i++)
         {
@@ -308,16 +327,21 @@ int start(RenderWindow& window)
         timer = delay * 1.1;
         f.x = 10;
         f.y = 10;
+		
+		int k = 0;
 
         DIRECTION temp_d = DIRECTION::DIRECTION_RIGHT;
         direction = temp_d;
 
         while (window.isOpen() && isPlaying)
         {
+			
             float time = clock.getElapsedTime().asSeconds();
+			float time2 = clock2.getElapsedTime().asSeconds();
             clock.restart();
-            timer += time;
-
+			
+			timer += time;
+			timer2 += time2;
             Event e;
             while (window.pollEvent(e))
             {
@@ -348,7 +372,7 @@ int start(RenderWindow& window)
                 // Delay time has reached, reset timer
                 timer = 0;
                 // Update position of object 
-                update(s, f, sound_eatfood);
+                 update(s, f, sound_eatfood);
 
 #pragma region Draw
 
@@ -379,6 +403,18 @@ int start(RenderWindow& window)
                 // Draw UI
                 txt.setString(std::to_string(score)); window.draw(txt); window.draw(txt_score);
 
+				// draw effect
+				if (foodeating)
+				{
+					k = 7;
+				}
+				if (k > 0)
+				{
+					txt2.setPosition(txt.getPosition().x + txt.getLocalBounds().width + 16, txt.getPosition().y);
+					window.draw(txt2);
+					k--;
+				}
+				
                 window.display();
 #pragma endregion
             }
