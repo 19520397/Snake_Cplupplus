@@ -86,7 +86,7 @@ void update(Snake*& s, Fruit& f, Sound& sound)
             }
         }
         sound.play();
-        score++;
+        score+=10;
         length++;
     }
 
