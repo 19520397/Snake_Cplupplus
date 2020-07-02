@@ -15,7 +15,7 @@ enum DIRECTION
     DIRECTION_RIGHT, DIRECTION_UP, DIRECTION_LEFT, DIRECTION_DOWN
 };
 
-int score = 1;
+int score = 0;
 
 // Width and Height of window in grid
 int N = 50, M = 50;
@@ -35,7 +35,7 @@ float height_UI = height_board;
 
 
 DIRECTION direction;
-int length = 2;
+int length = 3;
 
 struct Snake
 {
@@ -47,7 +47,6 @@ struct Fruit
     int x, y;
 };
 
-Sound loadSound(std::string);
 void loadScreen();
 int start(RenderWindow&);
 void update(Snake*&, Fruit&, Sound&);
@@ -254,11 +253,13 @@ int start(RenderWindow& window)
 {
     int op = 1;
     int MAX = (N - 2) * (M - 2);
+
     Sound sound_eatfood;
     SoundBuffer buffer;
     buffer.loadFromFile("audio/eatfood.ogg");
     sound_eatfood.setBuffer(buffer);
     sound_eatfood.setVolume(50.f);
+
     Snake* s = new Snake[MAX];
     Fruit f;
     Texture t1, t2, t3, t4;
@@ -298,9 +299,13 @@ int start(RenderWindow& window)
         float timer = 0, delay = 0.1;
         
         score = 0;
-        length = 1;
+        length = 3;
         s[0].x = 15;
         s[0].y = 15;
+        s[1].y = 14;
+        s[1].y = 15;
+        s[2].y = 14;
+        s[2].y = 15;
         f.x = 10;
         f.y = 10;
 
@@ -459,7 +464,11 @@ void loadScreen()
         {
             Sound sound;
             SoundBuffer buffer;
+            buffer.loadFromFile("audio/beforegame.ogg");
+            sound.setBuffer(buffer);
+            sound.setVolume(30.f);
             Font font;
+
             if (!font.loadFromFile("Fonts/ARCADECLASSIC.TTF"))
             {
                 cout << "ERROR: Could not load font";
@@ -508,10 +517,6 @@ void loadScreen()
                 if (isChanged)
                 {
                     window.clear();
-                   
-                    if (!buffer.loadFromFile("audio/beforegame.ogg")) cout << "Not found";
-                    sound.setBuffer(buffer);
-                    sound.setVolume(30.f);
                     sound.play();
 
                     txt.setFillColor(Color::Green);
