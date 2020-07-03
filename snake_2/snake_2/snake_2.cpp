@@ -161,7 +161,7 @@ int checkPlayAgain(RenderWindow& window)
     txt2.setFont(font2);
     txt2.setFillColor(Color::Black);
     txt2.setString(">");
-    txt2.setCharacterSize(50);
+    txt2.setCharacterSize(70);
 
     bool isChanged = true;
     sound_die.play();
@@ -202,12 +202,12 @@ int checkPlayAgain(RenderWindow& window)
             sound_choose.play();
 
             txt.setFillColor(Color::Red);
-            txt.setCharacterSize(150);
+            txt.setCharacterSize(180);
             txt.setString("You Died");
-            txt.setPosition((width_board + width_UI) / 2 - txt.getGlobalBounds().width / 2, height_board / 3 - txt.getGlobalBounds().height / 2);
+            txt.setPosition((width_board) / 2 - txt.getGlobalBounds().width / 2, height_board / 3 - txt.getGlobalBounds().height / 2);
             window.draw(txt);
 
-            float temp = txt.getPosition().y + txt.getGlobalBounds().height + 50;
+            float temp = txt.getPosition().y + txt.getGlobalBounds().height + 100;
             txt.setCharacterSize(txt2.getCharacterSize());
             txt.setFillColor(Color::Blue);
             txt.setString("Play again");
@@ -220,7 +220,7 @@ int checkPlayAgain(RenderWindow& window)
                 window.draw(txt2);
             }
 
-            txt.setString("Back");
+            txt.setString("Main Menu");
             txt.setPosition(txt.getPosition().x, txt.getPosition().y + txt.getGlobalBounds().height + 15);
             window.draw(txt);
 
@@ -231,10 +231,7 @@ int checkPlayAgain(RenderWindow& window)
             }
 
             window.display();
-            while (Keyboard::isKeyPressed(Keyboard::Up) || Keyboard::isKeyPressed(Keyboard::Down))
-            {
-                // wait for key up
-            }
+            while (Keyboard::isKeyPressed(Keyboard::Up) || Keyboard::isKeyPressed(Keyboard::Down)) {/*Wait to release key*/}
             isChanged = false;
         }
 
@@ -285,11 +282,11 @@ int checkResume(RenderWindow& window)
     {
         cout << "ERROR: Could not load font";
     }
-    Text txt2;
-    txt2.setFont(font2);
-    txt2.setFillColor(Color::Black);
-    txt2.setString(">");
-    txt2.setCharacterSize(50);
+    Text txt_selection;
+    txt_selection.setFont(font2);
+    txt_selection.setFillColor(Color::Black);
+    txt_selection.setString(">");
+    txt_selection.setCharacterSize(70);
 
     bool isChanged = true;
     while (window.isOpen())
@@ -324,13 +321,13 @@ int checkResume(RenderWindow& window)
             sound_choose.play();
 
             txt.setFillColor(Color::Red);
-            txt.setCharacterSize(150);
+            txt.setCharacterSize(180);
             txt.setString("Paused");
-            txt.setPosition((width_board + width_UI) / 2 - txt.getGlobalBounds().width / 2, height_board / 3 - txt.getGlobalBounds().height / 2);
+            txt.setPosition((width_board) / 2 - txt.getGlobalBounds().width / 2, height_board / 3 - txt.getGlobalBounds().height / 2);
             window.draw(txt);
 
-            float temp = txt.getPosition().y + txt.getGlobalBounds().height + 50;
-            txt.setCharacterSize(txt2.getCharacterSize());
+            float temp = txt.getPosition().y + txt.getGlobalBounds().height + 100;
+            txt.setCharacterSize(txt_selection.getCharacterSize());
             txt.setFillColor(Color::Blue);
             txt.setString("Resume");
             txt.setPosition(txt.getPosition().x + 80, temp);
@@ -338,8 +335,8 @@ int checkResume(RenderWindow& window)
 
             if (op == 2)
             {
-                txt2.setPosition(txt.getPosition().x - txt2.getGlobalBounds().width - 10, txt.getPosition().y);
-                window.draw(txt2);
+                txt_selection.setPosition(txt.getPosition().x - txt_selection.getGlobalBounds().width - 10, txt.getPosition().y);
+                window.draw(txt_selection);
             }
 
             txt.setString("Main Menu");
@@ -348,8 +345,8 @@ int checkResume(RenderWindow& window)
 
             if (op == 1)
             {
-                txt2.setPosition(txt.getPosition().x - txt2.getGlobalBounds().width - 10, txt.getPosition().y);
-                window.draw(txt2);
+                txt_selection.setPosition(txt.getPosition().x - txt_selection.getGlobalBounds().width - 10, txt.getPosition().y);
+                window.draw(txt_selection);
             }
 
             txt.setString("Quit");
@@ -358,8 +355,8 @@ int checkResume(RenderWindow& window)
 
             if (op == 0)
             {
-                txt2.setPosition(txt.getPosition().x - txt2.getGlobalBounds().width - 10, txt.getPosition().y);
-                window.draw(txt2);
+                txt_selection.setPosition(txt.getPosition().x - txt_selection.getGlobalBounds().width - 10, txt.getPosition().y);
+                window.draw(txt_selection);
             }
 
             window.display();
@@ -412,17 +409,17 @@ int start(RenderWindow& window)
     t_intruct.loadFromFile("images/key.png");
     t_pause.loadFromFile("images/esc.png");
 
-    Sprite sprite1(t1);
-    Sprite sprite2(t2);
-    Sprite sprite3(t3);
-    Sprite sprite4(t4);
+    Sprite sprite_white(t1);
+    Sprite sprite_red(t2);
+    Sprite sprite_purple(t3);
+    Sprite sprite_green(t4);
     Sprite sprite_intruct(t_intruct);
     Sprite sprite_pause(t_pause);
 
-    sprite1.scale(1.5f, 1.5f);
-    sprite2.scale(1.5f, 1.5f);
-    sprite3.scale(1.5f, 1.5f);
-    sprite4.scale(1.5f, 1.5f);
+    sprite_white.scale(1.5f, 1.5f);
+    sprite_red.scale(1.5f, 1.5f);
+    sprite_purple.scale(1.5f, 1.5f);
+    sprite_green.scale(1.5f, 1.5f);
     sprite_intruct.scale(0.5f, 0.5f);
     sprite_pause.scale(0.15f, 0.15f);
 
@@ -537,7 +534,9 @@ int start(RenderWindow& window)
         f.x = 10;
         f.y = 10;
 		
+        int effect_count_down = 0;
 		int k = 0;
+        int ran = 0;
 
         DIRECTION temp_d = DIRECTION::DIRECTION_RIGHT;
         direction = temp_d;
@@ -575,26 +574,26 @@ int start(RenderWindow& window)
                 window.clear();
 
                 // Draw background
-                for (int x = width_board - img_size; x > -1; x -= img_size) { sprite3.setPosition(x, 0);  window.draw(sprite3); } // Draw top Border
+                for (int x = width_board - img_size; x > -1; x -= img_size) { sprite_purple.setPosition(x, 0);  window.draw(sprite_purple); } // Draw top Border
                 for (int y = height_board - 2 * img_size; y > 0; y -= img_size)
                 {
-                    sprite3.setPosition(0, y);  window.draw(sprite3); // Draw left Border
+                    sprite_purple.setPosition(0, y);  window.draw(sprite_purple); // Draw left Border
                     for (int x = width_board - 2 * img_size; x > 0; x -= img_size)
                     {
-                        sprite1.setPosition(x, y);  window.draw(sprite1);
+                        sprite_white.setPosition(x, y);  window.draw(sprite_white);
                     }
-                    sprite3.setPosition(width_board - img_size, y);  window.draw(sprite3); // Draw right Border
+                    sprite_purple.setPosition(width_board - img_size, y);  window.draw(sprite_purple); // Draw right Border
                 }
-                for (int x = width_board - img_size; x > -1; x -= img_size) { sprite3.setPosition(x, height_board - img_size);  window.draw(sprite3); } // Draw bottom Border
+                for (int x = width_board - img_size; x > -1; x -= img_size) { sprite_purple.setPosition(x, height_board - img_size);  window.draw(sprite_purple); } // Draw bottom Border
 
                 // Draw snake
                 for (int i = 0; i < length; i++)
                 {
-                    sprite2.setPosition(s[i].x * img_size, s[i].y * img_size);  window.draw(sprite2);
+                    sprite_red.setPosition(s[i].x * img_size, s[i].y * img_size);  window.draw(sprite_red);
                 }
 
                 // Draw food
-                sprite4.setPosition(f.x * img_size, f.y * img_size);  window.draw(sprite4);
+                sprite_green.setPosition(f.x * img_size, f.y * img_size);  window.draw(sprite_green);
 
                 // Draw UI
                 txt.setString(std::to_string(score)); window.draw(txt); window.draw(txt_score);
@@ -632,26 +631,26 @@ int start(RenderWindow& window)
                 window.clear();
 
                 // Draw background
-                for (int x = width_board - img_size; x > -1; x -= img_size) { sprite3.setPosition(x, 0);  window.draw(sprite3); } // Draw top Border
+                for (int x = width_board - img_size; x > -1; x -= img_size) { sprite_purple.setPosition(x, 0);  window.draw(sprite_purple); } // Draw top Border
                 for (int y = height_board - 2 * img_size; y > 0; y -= img_size)
                 {
-                    sprite3.setPosition(0, y);  window.draw(sprite3); // Draw left Border
+                    sprite_purple.setPosition(0, y);  window.draw(sprite_purple); // Draw left Border
                     for (int x = width_board - 2 * img_size; x > 0; x -= img_size)
                     {
-                        sprite1.setPosition(x, y);  window.draw(sprite1);
+                        sprite_white.setPosition(x, y);  window.draw(sprite_white);
                     }
-                    sprite3.setPosition(width_board - img_size, y);  window.draw(sprite3); // Draw right Border
+                    sprite_purple.setPosition(width_board - img_size, y);  window.draw(sprite_purple); // Draw right Border
                 }
-                for (int x = width_board - img_size; x > -1; x -= img_size) { sprite3.setPosition(x, height_board - img_size);  window.draw(sprite3); } // Draw bottom Border
+                for (int x = width_board - img_size; x > -1; x -= img_size) { sprite_purple.setPosition(x, height_board - img_size);  window.draw(sprite_purple); } // Draw bottom Border
 
                 // Draw snake
                 for (int i = 0; i < length; i++)
                 {
-                    sprite2.setPosition(s[i].x * img_size, s[i].y * img_size);  window.draw(sprite2);
+                    sprite_red.setPosition(s[i].x * img_size, s[i].y * img_size);  window.draw(sprite_red);
                 }
 
                 // Draw food
-                sprite4.setPosition(f.x * img_size, f.y * img_size);  window.draw(sprite4);
+                sprite_green.setPosition(f.x * img_size, f.y * img_size);  window.draw(sprite_green);
 
                 // Draw UI
                 txt.setString(std::to_string(score)); window.draw(txt); window.draw(txt_score);
@@ -664,26 +663,24 @@ int start(RenderWindow& window)
                 window.draw(sprite_pause);
 
 				// draw effect
+                ran = rand() % 3;
 				if (foodeating)
 				{
-					k = 7;
+					effect_count_down = 7;
+                    k = 18;
 				}
-				if (k > 0)
+				if (effect_count_down > 0)
 				{
 					txt2.setPosition(txt.getPosition().x + txt.getLocalBounds().width + 16, txt.getPosition().y);
 					window.draw(txt2);
-					k--;
+					effect_count_down--;
 				}
 
-				int ran = rand() % 4;
 				switch (ran)
 				{
 				default:
 					break;
 				case 1:
-					if (foodeating) {
-						k = 57;
-					}
 					if (k > 0) {
 						txt3.setPosition(txt_score.getPosition().x, txt_score.getPosition().y - 50);
 						window.draw(txt3);
@@ -692,19 +689,13 @@ int start(RenderWindow& window)
 					break;
 
 				case 2:
-					if (foodeating) {
-						k = 25;
-					}
 					if (k > 0) {
 						txt4.setPosition(txt_score.getPosition().x, txt_score.getPosition().y - 70);
 						window.draw(txt4);
 						k--;
 					}
 					break;
-				case 3:
-					if (foodeating) {
-						k = 30;
-					}
+				case 0:
 					if (k > 0) {
 						txt5.setPosition(txt_score.getPosition().x, txt_score.getPosition().y - 90);
 						window.draw(txt5);
@@ -732,26 +723,26 @@ int start(RenderWindow& window)
                 window.clear();
 
                 // Draw background
-                for (int x = width_board - img_size; x > -1; x -= img_size) { sprite3.setPosition(x, 0);  window.draw(sprite3); } // Draw top Border
+                for (int x = width_board - img_size; x > -1; x -= img_size) { sprite_purple.setPosition(x, 0);  window.draw(sprite_purple); } // Draw top Border
                 for (int y = height_board - 2 * img_size; y > 0; y -= img_size)
                 {
-                    sprite3.setPosition(0, y);  window.draw(sprite3); // Draw left Border
+                    sprite_purple.setPosition(0, y);  window.draw(sprite_purple); // Draw left Border
                     for (int x = width_board - 2 * img_size; x > 0; x -= img_size)
                     {
-                        sprite1.setPosition(x, y);  window.draw(sprite1);
+                        sprite_white.setPosition(x, y);  window.draw(sprite_white);
                     }
-                    sprite3.setPosition(width_board - img_size, y);  window.draw(sprite3); // Draw right Border
+                    sprite_purple.setPosition(width_board - img_size, y);  window.draw(sprite_purple); // Draw right Border
                 }
-                for (int x = width_board - img_size; x > -1; x -= img_size) { sprite3.setPosition(x, height_board - img_size);  window.draw(sprite3); } // Draw bottom Border
+                for (int x = width_board - img_size; x > -1; x -= img_size) { sprite_purple.setPosition(x, height_board - img_size);  window.draw(sprite_purple); } // Draw bottom Border
 
                 // Draw snake
                 for (int i = 0; i < length; i++)
                 {
-                    sprite2.setPosition(s[i].x * img_size, s[i].y * img_size);  window.draw(sprite2);
+                    sprite_red.setPosition(s[i].x * img_size, s[i].y * img_size);  window.draw(sprite_red);
                 }
 
                 // Draw food
-                sprite4.setPosition(f.x * img_size, f.y * img_size);  window.draw(sprite4);
+                sprite_green.setPosition(f.x * img_size, f.y * img_size);  window.draw(sprite_green);
 
                 // Draw UI
                 txt.setString(std::to_string(score)); window.draw(txt); window.draw(txt_score);
