@@ -3,7 +3,6 @@
 #include <time.h>
 #include <iostream>
 #include <string>
-
 using namespace sf;
 using std::cin;
 using std::cout;
@@ -405,20 +404,30 @@ int start(RenderWindow& window)
     Snake* s = new Snake[MAX];
     Fruit f;
 
-    Texture t1, t2, t3, t4;
+    Texture t1, t2, t3, t4,t_intruct,t_pause;
     t1.loadFromFile("images/white.png");
     t2.loadFromFile("images/red.png");
     t3.loadFromFile("images/purble.jpg");
     t4.loadFromFile("images/green_2.png");
+    t_intruct.loadFromFile("images/key.png");
+    t_pause.loadFromFile("images/esc.png");
 
     Sprite sprite1(t1);
     Sprite sprite2(t2);
     Sprite sprite3(t3);
     Sprite sprite4(t4);
+    Sprite sprite_intruct(t_intruct);
+    Sprite sprite_pause(t_pause);
+
     sprite1.scale(1.5f, 1.5f);
     sprite2.scale(1.5f, 1.5f);
     sprite3.scale(1.5f, 1.5f);
     sprite4.scale(1.5f, 1.5f);
+    sprite_intruct.scale(0.5f, 0.5f);
+    sprite_pause.scale(0.15f, 0.15f);
+
+    sprite_intruct.setPosition(width_board + width_UI/2 - sprite_intruct.getGlobalBounds().width/2 - 10,  height_UI/3 - sprite_intruct.getGlobalBounds().height - 55);
+    sprite_pause.setPosition(sprite_intruct.getPosition().x, 30);
 
     Font font_arcade;
     if (!font_arcade.loadFromFile("Fonts/ARCADECLASSIC.TTF"))
@@ -436,6 +445,42 @@ int start(RenderWindow& window)
     txt_score.setCharacterSize(50);
     txt_score.setString("Point");
     txt_score.setPosition(width_board + width_UI / 2 - txt_score.getLocalBounds().width / 2, height_UI / 2 - 48);
+
+    Texture text_key;
+    text_key.loadFromFile("images/white.png");
+    Sprite sprite_key(text_key);
+    sprite_key.scale(1.5f, 1.5f);
+
+    Text intruct1,intruct2,intruct3,intruct4,pause;
+    intruct1.setFont(font_arcade);
+    intruct2.setFont(font_arcade);
+    intruct3.setFont(font_arcade);
+    intruct4.setFont(font_arcade);
+    pause.setFont(font_arcade);
+
+    intruct1.setFillColor(Color::White);
+    intruct2.setFillColor(Color::White);
+    intruct3.setFillColor(Color::White);
+    intruct4.setFillColor(Color::White);
+    pause.setFillColor(Color::White);
+
+    intruct1.setCharacterSize(30);
+    intruct2.setCharacterSize(30);
+    intruct3.setCharacterSize(30);
+    intruct4.setCharacterSize(30);
+    pause.setCharacterSize(30);
+
+    intruct1.setString("UP");
+    intruct2.setString("DOWN");
+    intruct3.setString("LEFT");
+    intruct4.setString("RIGHT");
+    pause.setString("PAUSE");
+
+    intruct1.setPosition(sprite_intruct.getPosition().x + sprite_key.getGlobalBounds().width * 2 + 20, sprite_intruct.getPosition().y - sprite_key.getGlobalBounds().height * 2);
+    intruct2.setPosition(sprite_intruct.getPosition().x + sprite_key.getGlobalBounds().width * 5 - intruct2.getGlobalBounds().width, sprite_intruct.getPosition().y + sprite_key.getGlobalBounds().height * 5);
+    intruct3.setPosition(sprite_intruct.getPosition().x - sprite_key.getGlobalBounds().width * 3 + 5, sprite_intruct.getPosition().y + sprite_key.getGlobalBounds().height * 3 - 10);
+    intruct4.setPosition(sprite_intruct.getPosition().x + sprite_key.getGlobalBounds().width * 7 + 5, sprite_intruct.getPosition().y + sprite_key.getGlobalBounds().height * 3 - 10);
+    pause.setPosition(sprite_pause.getPosition().x + sprite_key.getGlobalBounds().width*2 + 30,sprite_pause.getPosition().y + 15);
 
     Text txt;
     txt.setFont(font_manaspc);
@@ -526,7 +571,7 @@ int start(RenderWindow& window)
             {
                 while (Keyboard::isKeyPressed(Keyboard::Escape)) {/*Wait for key up*/ }
 #pragma region Draw
-
+                
                 window.clear();
 
                 // Draw background
@@ -610,6 +655,13 @@ int start(RenderWindow& window)
 
                 // Draw UI
                 txt.setString(std::to_string(score)); window.draw(txt); window.draw(txt_score);
+                window.draw(intruct1);
+                window.draw(intruct2);
+                window.draw(intruct3);
+                window.draw(intruct4);
+                window.draw(pause);
+                window.draw(sprite_intruct);
+                window.draw(sprite_pause);
 
 				// draw effect
 				if (foodeating)
@@ -703,6 +755,13 @@ int start(RenderWindow& window)
 
                 // Draw UI
                 txt.setString(std::to_string(score)); window.draw(txt); window.draw(txt_score);
+                window.draw(intruct1); 
+                window.draw(intruct2);
+                window.draw(intruct3);
+                window.draw(intruct4);
+                window.draw(pause);
+                window.draw(sprite_intruct);
+                window.draw(sprite_pause);
 
                 window.display();
 #pragma endregion
