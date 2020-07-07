@@ -1,0 +1,54 @@
+﻿  snake_2.cpp
+D:\chuyên môn\code\github\Snake_Cplupplus\main_project\snake_2\snake_2.cpp(517,19): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+D:\chuyên môn\code\github\Snake_Cplupplus\main_project\snake_2\snake_2.cpp(524,37): warning C4305: 'initializing': truncation from 'double' to 'float'
+D:\chuyên môn\code\github\Snake_Cplupplus\main_project\snake_2\snake_2.cpp(533,23): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+D:\chuyên môn\code\github\Snake_Cplupplus\main_project\snake_2\snake_2.cpp(577,28): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+D:\chuyên môn\code\github\Snake_Cplupplus\main_project\snake_2\snake_2.cpp(577,75): warning C4244: '-=': conversion from 'float' to 'int', possible loss of data
+D:\chuyên môn\code\github\Snake_Cplupplus\main_project\snake_2\snake_2.cpp(577,105): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+D:\chuyên môn\code\github\Snake_Cplupplus\main_project\snake_2\snake_2.cpp(578,28): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+D:\chuyên môn\code\github\Snake_Cplupplus\main_project\snake_2\snake_2.cpp(578,79): warning C4244: '-=': conversion from 'float' to 'int', possible loss of data
+D:\chuyên môn\code\github\Snake_Cplupplus\main_project\snake_2\snake_2.cpp(580,50): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+D:\chuyên môn\code\github\Snake_Cplupplus\main_project\snake_2\snake_2.cpp(581,32): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+D:\chuyên môn\code\github\Snake_Cplupplus\main_project\snake_2\snake_2.cpp(581,82): warning C4244: '-=': conversion from 'float' to 'int', possible loss of data
+D:\chuyên môn\code\github\Snake_Cplupplus\main_project\snake_2\snake_2.cpp(583,53): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+D:\chuyên môn\code\github\Snake_Cplupplus\main_project\snake_2\snake_2.cpp(583,50): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+D:\chuyên môn\code\github\Snake_Cplupplus\main_project\snake_2\snake_2.cpp(585,71): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+D:\chuyên môn\code\github\Snake_Cplupplus\main_project\snake_2\snake_2.cpp(587,28): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+D:\chuyên môn\code\github\Snake_Cplupplus\main_project\snake_2\snake_2.cpp(587,75): warning C4244: '-=': conversion from 'float' to 'int', possible loss of data
+D:\chuyên môn\code\github\Snake_Cplupplus\main_project\snake_2\snake_2.cpp(587,105): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+D:\chuyên môn\code\github\Snake_Cplupplus\main_project\snake_2\snake_2.cpp(634,28): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+D:\chuyên môn\code\github\Snake_Cplupplus\main_project\snake_2\snake_2.cpp(634,75): warning C4244: '-=': conversion from 'float' to 'int', possible loss of data
+D:\chuyên môn\code\github\Snake_Cplupplus\main_project\snake_2\snake_2.cpp(634,105): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+D:\chuyên môn\code\github\Snake_Cplupplus\main_project\snake_2\snake_2.cpp(635,28): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+D:\chuyên môn\code\github\Snake_Cplupplus\main_project\snake_2\snake_2.cpp(635,79): warning C4244: '-=': conversion from 'float' to 'int', possible loss of data
+D:\chuyên môn\code\github\Snake_Cplupplus\main_project\snake_2\snake_2.cpp(637,50): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+D:\chuyên môn\code\github\Snake_Cplupplus\main_project\snake_2\snake_2.cpp(638,32): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+D:\chuyên môn\code\github\Snake_Cplupplus\main_project\snake_2\snake_2.cpp(638,82): warning C4244: '-=': conversion from 'float' to 'int', possible loss of data
+D:\chuyên môn\code\github\Snake_Cplupplus\main_project\snake_2\snake_2.cpp(640,53): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+D:\chuyên môn\code\github\Snake_Cplupplus\main_project\snake_2\snake_2.cpp(640,50): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+D:\chuyên môn\code\github\Snake_Cplupplus\main_project\snake_2\snake_2.cpp(642,71): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+D:\chuyên môn\code\github\Snake_Cplupplus\main_project\snake_2\snake_2.cpp(644,28): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+D:\chuyên môn\code\github\Snake_Cplupplus\main_project\snake_2\snake_2.cpp(644,75): warning C4244: '-=': conversion from 'float' to 'int', possible loss of data
+D:\chuyên môn\code\github\Snake_Cplupplus\main_project\snake_2\snake_2.cpp(644,105): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+D:\chuyên môn\code\github\Snake_Cplupplus\main_project\snake_2\snake_2.cpp(726,28): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+D:\chuyên môn\code\github\Snake_Cplupplus\main_project\snake_2\snake_2.cpp(726,75): warning C4244: '-=': conversion from 'float' to 'int', possible loss of data
+D:\chuyên môn\code\github\Snake_Cplupplus\main_project\snake_2\snake_2.cpp(726,105): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+D:\chuyên môn\code\github\Snake_Cplupplus\main_project\snake_2\snake_2.cpp(727,28): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+D:\chuyên môn\code\github\Snake_Cplupplus\main_project\snake_2\snake_2.cpp(727,79): warning C4244: '-=': conversion from 'float' to 'int', possible loss of data
+D:\chuyên môn\code\github\Snake_Cplupplus\main_project\snake_2\snake_2.cpp(729,50): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+D:\chuyên môn\code\github\Snake_Cplupplus\main_project\snake_2\snake_2.cpp(730,32): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+D:\chuyên môn\code\github\Snake_Cplupplus\main_project\snake_2\snake_2.cpp(730,82): warning C4244: '-=': conversion from 'float' to 'int', possible loss of data
+D:\chuyên môn\code\github\Snake_Cplupplus\main_project\snake_2\snake_2.cpp(732,53): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+D:\chuyên môn\code\github\Snake_Cplupplus\main_project\snake_2\snake_2.cpp(732,50): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+D:\chuyên môn\code\github\Snake_Cplupplus\main_project\snake_2\snake_2.cpp(734,71): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+D:\chuyên môn\code\github\Snake_Cplupplus\main_project\snake_2\snake_2.cpp(736,28): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+D:\chuyên môn\code\github\Snake_Cplupplus\main_project\snake_2\snake_2.cpp(736,75): warning C4244: '-=': conversion from 'float' to 'int', possible loss of data
+D:\chuyên môn\code\github\Snake_Cplupplus\main_project\snake_2\snake_2.cpp(736,105): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+D:\chuyên môn\code\github\Snake_Cplupplus\main_project\snake_2\snake_2.cpp(832,59): warning C4244: 'argument': conversion from 'float' to 'unsigned int', possible loss of data
+D:\chuyên môn\code\github\Snake_Cplupplus\main_project\snake_2\snake_2.cpp(832,47): warning C4244: 'argument': conversion from 'float' to 'unsigned int', possible loss of data
+  Generating code
+  1 of 101 functions ( 1.0%) were compiled, the rest were copied from previous compilation.
+    0 functions were new in current compilation
+    1 functions had inline decision re-evaluated but remain unchanged
+  Finished generating code
+  snake_2.vcxproj -> D:\chuyên môn\code\github\Snake_Cplupplus\main_project\x64\Release\snake_2.exe

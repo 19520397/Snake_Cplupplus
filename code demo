@@ -1,0 +1,158 @@
+#include <iostream>
+#include <windows.h>
+#include <conio.h>
+#include <cstdlib>
+#include <ctime>
+
+using namespace std;
+
+void gotoxy(int column, int line)
+{
+	COORD coord;
+	coord.X = column;
+	coord.Y = line;
+	SetConsoleCursorPosition(
+		GetStdHandle(STD_OUTPUT_HANDLE),
+		coord
+		);
+}
+struct POIN {
+	int x, y, x0, y0;
+};
+
+class SNAKE {
+public:
+	int snakelength;
+	POIN snake[100];
+	void move(char direct) {
+		snake[0].x0 = snake[0].x; snake[0].y0 = snake[0].y;
+		switch (direct) {
+		case 'a': 
+			snake[0].x--;
+			break;
+		case 's':
+			snake[0].y++;
+			break;
+		case 'd':
+			snake[0].x++;
+			break;
+		case 'w':
+			snake[0].y--;
+			break;
+		}
+		for (int i = 1; i < snakelength; i++) {
+			snake[i].x0 = snake[i].x;
+			snake[i].y0 = snake[i].y;
+			snake[i].x = snake[i - 1].x0;
+			snake[i].y = snake[i - 1].y0;
+		}
+	}
+	void init() {
+		snakelength = 3;
+		snake[0].x = 3;
+		snake[0].y = 1;
+		snake[1].x = 2;
+		snake[1].y = 1;
+		snake[2].x = 1;
+		snake[2].y = 1;
+	}
+	void draw() {
+		for (int i = 0; i < snakelength; i++) {
+			gotoxy(snake[i].x, snake[i].y);
+			if (i == 0) cout << "@";
+			else cout << "0";
+		}
+	}
+};
+class FOOD {
+public:
+	POINT toado;
+	void make_food() {
+		toado.x = rand() % 30;
+		toado.y = rand() % 20;
+	}
+	bool check_food(SNAKE s) {
+		if (toado.x == 0 || toado.x == 30 || toado.y == 0 || toado.y == 20) return false;
+		for (int i = 0; i < s.snakelength; i++) {
+			if (s.snake[i].x == toado.x && s.snake[i].y == toado.y) return false;
+		}
+		return true;
+	}
+	void create_food(SNAKE s) {
+		do {
+			make_food();
+		} while (!check_food(s));
+	}
+	void draw() {
+		gotoxy(toado.x, toado.y);
+		cout << '+';
+	}
+};
+int score = 0;
+class BOARD {
+public:
+	void draw() {
+		gotoxy(1, 0);
+		for (int i = 1; i < 31; i++) {
+			cout << "-";
+		}
+		cout << "\n";
+		for (int i = 1; i < 21; i++) {
+			cout << "|                              |\n";
+		}
+		cout << " ";
+		for (int i = 1; i < 31; i++) {
+			cout << "-";
+		}
+		cout << "\n\n\t    ";
+		cout << "SCORE: " << score;
+	}
+};
+
+bool end_game(SNAKE s) {
+	if (s.snake[0].x > 30 || s.snake[0].x < 1 || s.snake[0].y > 20 || s.snake[0].y < 1) return true;
+	for (int i = 1; i < s.snakelength; i++) {
+		if (s.snake[0].x == s.snake[i].x && s.snake[0].y == s.snake[i].y) return true;
+	}
+	return false;
+}
+void eat_food(SNAKE& s, FOOD& food) {
+	if (s.snake[0].x == food.toado.x && s.snake[0].y == food.toado.y) {
+		s.snake[s.snakelength].x = s.snake[s.snakelength - 1].x;
+		s.snake[s.snakelength].y = s.snake[s.snakelength - 1].y;
+		s.snakelength++;
+		food.create_food(s);
+		score += 10;
+	}
+}
+
+int main() {
+	ios_base::sync_with_stdio(false);
+	cin.tie(NULL);
+	srand(time(NULL));
+	SNAKE snake;
+	snake.init();
+	FOOD food;
+	BOARD board;
+	food.create_food(snake);
+	char direct = 'd',last;
+	while (!end_game(snake)) {
+		if (_kbhit()) {
+			last = direct;
+			direct = _getch();
+			if (direct != 'a' && direct != 'w' && direct != 'd' && direct != 's') direct = last;
+			if (direct == 'a' && last == 'd' || direct == 'd' && last == 'a' || direct == 's' && last == 'w' || direct == 'w' && last == 's') direct = last;
+		}
+		system("cls");
+		board.draw();
+		snake.move(direct);
+		snake.draw();
+		eat_food(snake,food);
+		food.draw();
+		Sleep(200);
+	}
+	gotoxy(12, 25);
+	cout << "END GAME";
+	return 0;
+}
+
