@@ -779,7 +779,6 @@ void gameOver()
 {
     cout << "Game Over\n";
     isAlive = false;
-	//system("pause");
 }
 
 int show_credit(RenderWindow& window)
@@ -954,3 +953,5 @@ int main()
 
     return 0;
 }
+
+
