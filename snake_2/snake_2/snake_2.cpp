@@ -3,6 +3,7 @@
 #include <time.h>
 #include <iostream>
 #include <string>
+#include <vector>
 using namespace sf;
 using std::cin;
 using std::cout;
