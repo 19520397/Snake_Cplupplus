@@ -4,7 +4,9 @@ Lập trình trên Visual Studio, thêm 1 thư viện SFML.
 
 Bài tập nhóm: Lập trình game "Con Rắn" bằng ngôn ngữ C++ trên nền tảng Windows.
 
-Link bản hợp đồng nhóm(only-read): https://www.overleaf.com/read/sbvjwjpjbvcf
+Link bản hợp đồng nhóm(only-read): https://www.overleaf.com/read/sbvjwjpjbvcf (bản cũ)
+
+Link hợp đồng nhóm sau khi chỉnh sửa (only-read): https://www.overleaf.com/read/vbbbhsxyhqgj
 
 # PHÂN CHIA CÔNG VIỆC
 
