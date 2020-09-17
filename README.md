@@ -26,6 +26,7 @@ Do thầy dời deadline nên thời hạn nộp được tăng lên, cụ thể
 
 # THÔNG BÁO
 
-Commit thường xuyên để kiểm tra tiến độ. 
+Commit thường xuyên để kiểm tra tiến độ.
 
 Nếu có lỗi phát sinh thì thông báo trên group messenger.
+t thich t chinh
