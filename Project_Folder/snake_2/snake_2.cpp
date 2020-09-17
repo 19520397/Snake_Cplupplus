@@ -951,7 +951,7 @@ int main()
 {
     loadScreen();
 
-    return 0;
+    return 97;
 }
 
 
